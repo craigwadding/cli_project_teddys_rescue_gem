@@ -1,47 +1,71 @@
 class TeddysRescue::CLI
-
-    
-    def call 
-        puts "\nWelcome to Teddys Rescue!\n"
-        puts "Here is a list of our adoptable pets!" 
-
-        @input = "" 
-        until @input == "exit"
-
-        
+    def call
+        welcome
         scrape_pets
         list_pets
-        what_to_do_now
-
-        end 
-        goodbye 
+        dog_choice
     end
     
+    def welcome 
+        puts "\nWelcome to Teddys Rescue!\n"
+    end
+
+    def user_choice
+        puts "Would you like to see the dogs that we have available?      (y/n)"
+        get_input
+    end
+
+    def get_input
+
+        input = gets.chomp.downcase
+
+       
+        if input == "y"
+            puts "Here is a list of available dogs to adopt."
+            
+            list_pets
+        elsif input == "n"
+            goodbye 
+        else
+            puts "Sorry, please select y or n."
+            welcome
+        end
+     
+    end
+
     def scrape_pets
         Scraper.scrape_pets
     end
+   
 
-    def list_pets 
-        puts "Select the number for the pet to see more info."
+    def list_pets
+        puts "\nPlease type in the name of the pet to see more info."
         Dog.all.each.with_index do |dog, index| 
             puts "#{index + 1}. #{dog.name}"
+        end
+        dog_choice    
     end
 
-    def get_users_selection
-
-    end
+    def dog_choice
         
+        input = gets.chomp
+
+        @dog = Dog.find_by_input(input) 
+
+        if Dog.all.include?(@dog)
+       
+            puts "#{@dog.bio}"
+            puts "_______________________________________________________"
+            user_choice
+        else
+            puts "Sorry, to choose dog please type their name."
+            list_pets
+        end
     end
-
-
-
-    def what_to_do_now 
-        puts "Type 'exit' to leave or hit any key to see list of available pets again."
-        @input = gets.strip 
-    end 
 
     def goodbye 
-        puts "Thank you for visiting Teddys Rescue!" 
+        puts "\nThank you for visiting Teddys Rescue!\n" 
+        exit
     end
 
 end
