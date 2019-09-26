@@ -1,8 +1,6 @@
 # TeddysRescue
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/teddys_rescue`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+teddys_rescue gem scrapes the HTML of teddysrescue.org a pet rescue in Findlay Ohio. It collects the names of dogs currently available for adoption.  After running the gem you will be given a list of available dogs. If you submit a dog's name , it will provide you with the information available for chosen dog.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After installing gem, please type in  ./bin/teddys_rescue 
 
 ## Development
 
